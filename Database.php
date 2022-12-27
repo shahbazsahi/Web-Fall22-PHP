@@ -16,22 +16,41 @@ class Database{
     } 
 
     function signup($u, $p){
-        $sql = "INSERT INTO `users` (`uid`, `uname`, `upas`, `created_at`) VALUES (NULL, ?, ?, current_timestamp());";
-        $st = $this->db->prepare($sql);
-        $st->execute(array($u, $p));
+        try{
+            $sql = "INSERT INTO `users` (`uid`, `uname`, `upas`, `created_at`) VALUES (NULL, ?, ?, current_timestamp());";
+            $st = $this->db->prepare($sql);
+            $st->execute(array($u, $p));
+            return true;
+        }
+        catch(PDOException $e){
+            return false;
+        }        
     }
 
     function signIn($u, $p){
         $sql = "SELECT uid FROM `users` WHERE `uname` = ? AND `upas` = ?;";
         $st = $this->db->prepare($sql);
         $st->execute(array($u, $p));
-        if($st->rowCount() == 1){
-            $ur = $st->fetch();
-            print("Welcome: $ur[0]");
+
+        if($st->rowCount() == 1 ){
+            return true;
         }
         else{
-            print('Login Failed');
+            false;
         }
+    }
+
+    function fetchAllUsers(){
+        $sql = "SELECT * FROM users";
+        $st = $this->db->prepare($sql);
+        $st->execute(array());
+        return $st;
+    }
+
+    function deleteUser($id){
+        $sql = "DELETE FROM users WHERE uid = ?";
+        $st = $this->db->prepare($sql);
+        $st->execute(array($id));
     }
 }
 

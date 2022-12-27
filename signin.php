@@ -26,6 +26,13 @@
     </div>
     <button type="submit" class="btn btn-default">Signin</button>
   </form>
+
+  <?php
+    if(isset($_GET['rid'])){
+      print('<div class="alert alert-danger">
+      <strong>Login Failed!</strong>');
+    }
+  ?>
 </div>
 
 </body>
