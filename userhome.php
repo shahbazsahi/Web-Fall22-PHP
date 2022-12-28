@@ -1,11 +1,7 @@
 <?php
-/*
-  if(!isset($_COOKIE['loggedIn'])){
-    header('location:signin.php?rid=5');
-  }
-  if(isset($_GET['rid'])){
-      $id = $_GET['rid'];
-  }*/
+if(!isset($_COOKIE['loged_in']))
+  header('location:signin.php?rid=5');
+$id = $_GET['rid'];
 ?>
 
 <!DOCTYPE html>

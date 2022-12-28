@@ -9,7 +9,7 @@ $pass = md5($_POST['pwd']);
 $res = $db->signin($un, $pass);
 
 if($res === true){
-    setcookie('loggedIn', true);
+    setcookie('loged_in', true);
     header('location:userhome.php?rid=1');
 }
 else{
